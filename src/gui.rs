@@ -1,33 +1,35 @@
 // Change values
-const SET_VALUES_STR     : &str = "set";
-const SET_WEIGHTS_STR    : &str = "stw";
-const SET_SAMPLE_SIZE_STR: &str = "sps";
-const RESET_VALUE_STR    : &str = "rsv";
-const RESET_WEIGHTS_STR  : &str = "rsw";
-const RESET_ALL_STR      : &str = "rsa";
+pub const SET_VALUES_STR     : &str = "set";
+pub const SET_WEIGHTS_STR    : &str = "stw";
+pub const SET_SAMPLE_SIZE_STR: &str = "sps";
+pub const RESET_VALUE_STR    : &str = "rsv";
+pub const RESET_WEIGHTS_STR  : &str = "rsw";
+pub const RESET_ALL_STR      : &str = "rsa";
 
 // File manipulation
-const VALUES_FROM_FILE_STR : &str = "rvf";
-const WEIGHTS_FROM_FILE_STR: &str = "rwf";
+pub const VALUES_FROM_FILE_STR : &str = "rvf";
+pub const WEIGHTS_FROM_FILE_STR: &str = "rwf";
 
 // Display values
-const SHOW_SAMPLE_SIZE_STR: &str = "shs";
-const SHOW_VALUES_STR     : &str = "shv";
-const SHOW_WEIGHTS_STR    : &str = "shw";
-const SHOW_ALL_STR        : &str = "sha";
+pub const SHOW_SAMPLE_SIZE_STR: &str = "shs";
+pub const SHOW_VALUES_STR     : &str = "shv";
+pub const SHOW_WEIGHTS_STR    : &str = "shw";
+pub const SHOW_ALL_STR        : &str = "sha";
 
 // Do calculations
-const AVERAGE_STR        : &str = "avg";
-const WEIGHED_AVERAGE_STR: &str = "wav";
-const STD_DEVIATION_STR  : &str = "std";
-const BIG_VALUE_STR      : &str = "bvl";
-const SMALL_VALUE_STR    : &str = "svl";
+pub const AVERAGE_STR        : &str = "avg";
+pub const WEIGHED_AVERAGE_STR: &str = "wav";
+pub const STD_DEVIATION_STR  : &str = "std";
+pub const BIG_VALUE_STR      : &str = "bvl";
+pub const SMALL_VALUE_STR    : &str = "svl";
 
 // General purpose commands
-const HIDE_WARNINGS_STR: &str = "hid";
-const RESET_SCREEN_STR : &str = "rsc";
-const EXIT_STR         : &str = "q";
-const HELP_STR         : &str = "h";
+pub const HIDE_WARNINGS_STR: &str = "hid";
+pub const RESET_SCREEN_STR : &str = "rsc";
+pub const EXIT_STR         : &str = "q";
+pub const HELP_STR         : &str = "h";
+
+pub const NULL_INPUT_STR   : &str = "nul";
 
 
 pub fn print_title() {
@@ -41,7 +43,7 @@ pub fn print_title() {
 	println!(" / /   / __ `/ / ___/ / / / / __ `/ __/ __ \\/ ___/                    ");
 	println!("/ /___/ /_/ / / /__/ /_/ / / /_/ / /_/ /_/ / /                        ");
 	println!("\\____/\\__,_/_/\\___/\\__,_/_/\\__,_/\\__/\\____/_/  v1.0.0.rs");
-	println!("\n\n~By Raphael Zoega~");
+	println!("~By Raphael Zoega~");
 }
 
 pub fn print_commands() {
@@ -73,5 +75,5 @@ pub fn print_commands() {
 	println!("| RESET CONSOLE ------------------------------------------------ '{}' |", RESET_SCREEN_STR);
 	println!("| REQUEST HELP --------------------------------------------------- '{}' |", HELP_STR);
 	println!("| TERMINATE PROGRAM ---------------------------------------------- '{}' |", EXIT_STR);
-	println!("|______________________________________________________________________|\n");
+	println!("|______________________________________________________________________|");
 }

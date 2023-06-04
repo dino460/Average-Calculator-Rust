@@ -1,7 +1,5 @@
 pub use std::io;
 
-pub mod functions {}
-
 pub fn average(values_vec: &Vec<f32>, sample_size: usize) -> f32 {
     let mut average_value: f32 = 0.0;
 
