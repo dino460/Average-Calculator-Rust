@@ -1,6 +1,9 @@
 mod functions;
+mod gui;
 
 fn main() {
-    let sample_values:Vec<f32> = Vec::new();
+    gui::print_title();
+    gui::print_commands();
     
+    let sample_values:Vec<f32> = Vec::new();
 }
