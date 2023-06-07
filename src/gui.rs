@@ -77,3 +77,12 @@ pub fn print_commands() {
 	println!("| TERMINATE PROGRAM ---------------------------------------------- '{}' |", EXIT_STR);
 	println!("|______________________________________________________________________|");
 }
+
+
+pub fn print_vec(vec: & Vec<f32>, sample_size: usize) {
+	for index in 0..sample_size {
+		print!("{} ", vec[index]);
+	}
+
+	println!("");
+}

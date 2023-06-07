@@ -1,5 +1,7 @@
 pub use std::io;
 
+
+// Value calculation functions
 pub fn average(values_vec: &Vec<f32>, sample_size: usize) -> f32 {
     let mut average_value: f32 = 0.0;
 
@@ -60,27 +62,36 @@ pub fn get_smallest_value(values_vec: &Vec<f32>) -> f32 {
     return smallest_value;
 }
 
-pub fn initialize_vec(values_vec: &mut Vec<f32>, sample_size: usize) {
-    for index in 0..sample_size {
-        let mut input = String::new();
-        
-        io::stdin().read_line(&mut input).expect("Wrong input.");
 
-        let input_as_f32 = match input.parse() {
+// Vector manipulation functions
+pub fn change_vec_values(mut vec: Vec<f32>, sample_size: usize) -> Vec<f32> {
+    vec.clear();
+    vec = Vec::with_capacity(sample_size);
+
+    let mut input: String = String::new();
+
+    for index in 0..sample_size {
+        io::stdin().read_line(&mut input);
+        input.pop();
+    
+        let input_as_f32: f32 = match input.parse::<f32>() {
             Ok(v) => v,
             Err(_) => 0.0
         };
 
-        values_vec.push(input_as_f32);
+        vec.push(input_as_f32);
+        input.clear();
     }
+
+    vec
 }
 
 pub fn change_vec_size(values_vec: Vec<f32>, mut sample_size: usize) -> Vec<f32> {
     let mut input = String::new();
     
-    io::stdin().read_line(&mut input).expect("Wrong input.");
+    io::stdin().read_line(&mut input);
     
-    let input_as_usize: usize = match input.parse() {
+    let input_as_usize: usize = match input.parse::<usize>() {
         Ok(v) => v,
         Err(_) => 5
     };
