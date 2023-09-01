@@ -43,7 +43,7 @@ pub fn print_title() {
 	println!(" / /   / __ `/ / ___/ / / / / __ `/ __/ __ \\/ ___/                    ");
 	println!("/ /___/ /_/ / / /__/ /_/ / / /_/ / /_/ /_/ / /                        ");
 	println!("\\____/\\__,_/_/\\___/\\__,_/_/\\__,_/\\__/\\____/_/  v1.0.0.rs");
-	println!("~By Raphael Zoega~");
+	println!("~By Raphael Zoega~\n");
 }
 
 pub fn print_commands() {
@@ -75,14 +75,12 @@ pub fn print_commands() {
 	println!("| RESET CONSOLE ------------------------------------------------ '{}' |", RESET_SCREEN_STR);
 	println!("| REQUEST HELP --------------------------------------------------- '{}' |", HELP_STR);
 	println!("| TERMINATE PROGRAM ---------------------------------------------- '{}' |", EXIT_STR);
-	println!("|______________________________________________________________________|");
+	println!("|______________________________________________________________________|\n");
 }
 
 
-pub fn print_vec(vec: & Vec<f32>, sample_size: usize) {
-	for index in 0..sample_size {
-		print!("{} ", vec[index]);
+pub fn print_vec(vec: & Vec<f32>) {
+	for index in 0..vec.len() {
+		print!("{}, ", vec[index]);
 	}
-
-	println!("");
 }

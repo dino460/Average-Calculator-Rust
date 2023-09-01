@@ -107,21 +107,7 @@ pub fn reset_vec_values(vec: &mut Vec<f32>, sample_size: usize) {
     }
 }
 
-pub fn change_vec_size(values_vec: Vec<f32>) -> usize {
-    let mut input = String::new();
-    
-    match io::stdin().read_line(&mut input) {
-        Err(error) => {
-            println!("Invalid input. Defaulting to '5'\n error: {error}");
-            input = String::from("5");
-        },
-        _ => (),
-    };
-    
-    let sample_size: usize = match input.parse::<usize>() {
-        Ok(v) => v,
-        Err(_) => 5
-    };
-
-    sample_size
+pub fn change_vec_size(values_vec: &mut Vec<f32>, sample_size: usize) {
+    values_vec.clear();
+    values_vec.resize(sample_size, 0.0);
 }

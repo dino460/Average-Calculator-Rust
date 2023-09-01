@@ -3,5 +3,5 @@
 version = 3
 
 [[package]]
-name = "Average-Calculator-Rust"
+name = "average-calculator-rust"
 version = "0.1.0"

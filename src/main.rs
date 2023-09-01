@@ -1,4 +1,4 @@
-use std::io;
+use std::io::{self, Write};
 
 mod functions;
 mod gui;
@@ -21,9 +21,26 @@ fn main() {
     while input != gui::EXIT_STR {
         input.clear();
 
+        if show_sample_size {
+            println!("Sample size: {sample_size}");
+        }
+        if show_sample_values {
+            print!("Sample values: [");
+            gui::print_vec(&sample_values);
+            println!("]");
+        }
+        if show_weight_values {
+            print!("Weight values: [");
+            gui::print_vec(&weight_values);
+            println!("]");
+        }
+
+        print!(": ");
+        let _ = io::stdout().flush();
+        
         match io::stdin().read_line(&mut input) {
             Err(error) => {
-                println!("Invalid input.\n error: {error}");
+                println!(">>> Invalid input.\n error: {error}");
                 input = String::from(gui::NULL_INPUT_STR);
             },
             _ => (),
@@ -36,12 +53,10 @@ fn main() {
             gui::SET_VALUES_STR => {
                 sample_values.clear();
                 functions::change_vec_values(&mut sample_values, sample_size);
-                gui::print_vec(&sample_values, sample_size);
             },
             gui::SET_WEIGHTS_STR => {
                 weight_values.clear();
                 functions::change_vec_values(&mut weight_values, sample_size);
-                gui::print_vec(&weight_values, sample_size)
             },
             gui::SET_SAMPLE_SIZE_STR => {
                 input.clear();
@@ -60,6 +75,9 @@ fn main() {
                     Ok(v) => v,
                     Err(_) => 5
                 };
+
+                functions::change_vec_size(&mut sample_values, sample_size);
+                functions::change_vec_size(&mut weight_values, sample_size);
                 println!("new sample size: {sample_size}");
             },
             
@@ -121,5 +139,7 @@ fn main() {
 
             _ => println!("Unknown command.")
         }
+
+        print!(": ");
     }
 }
