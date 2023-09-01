@@ -35,17 +35,24 @@ fn main() {
         match input.as_str() {
             gui::SET_VALUES_STR => {
                 sample_values.clear();
-                sample_values = functions::change_vec_values(sample_values, sample_size);
+                functions::change_vec_values(&mut sample_values, sample_size);
                 gui::print_vec(&sample_values, sample_size);
             },
             gui::SET_WEIGHTS_STR => {
                 weight_values.clear();
-                weight_values = functions::change_vec_values(weight_values, sample_size);
+                functions::change_vec_values(&mut weight_values, sample_size);
                 gui::print_vec(&weight_values, sample_size)
             },
             gui::SET_SAMPLE_SIZE_STR => {
                 input.clear();
-                io::stdin().read_line(&mut input);
+                match io::stdin().read_line(&mut input) {
+                    Err(error) => {
+                        println!("Invalid input.\n error: {error}");
+                        input = String::from("5");
+                    },
+                    _ => (),
+                }
+                
                 input.pop();
                 println!("{:?}", input);
     
@@ -58,26 +65,45 @@ fn main() {
             
             gui::RESET_ALL_STR => {
                 sample_size = 5;
-                sample_values = functions::change_vec_values(vec![0.0, 0.0, 0.0, 0.0, 0.0], 5);
-                weight_values = functions::change_vec_values(vec![0.0, 0.0, 0.0, 0.0, 0.0], 5);
+                functions::reset_vec_values(&mut sample_values, sample_size);
+                functions::reset_vec_values(&mut weight_values, sample_size);
             },
             gui::RESET_VALUE_STR => {
                 sample_size = 5;
-                sample_values = functions::change_vec_values(vec![0.0, 0.0, 0.0, 0.0, 0.0], 5);
+                functions::reset_vec_values(&mut sample_values, sample_size);
             },
             gui::RESET_WEIGHTS_STR => {
                 sample_size = 5;
-                weight_values = functions::change_vec_values(vec![0.0, 0.0, 0.0, 0.0, 0.0], 5);
+                functions::reset_vec_values(&mut weight_values, sample_size);
             },
 
             gui::VALUES_FROM_FILE_STR => (),
             gui::WEIGHTS_FROM_FILE_STR => (),
             
-            gui::AVERAGE_STR => println!("{}", functions::average(&sample_values, sample_size)),
-            gui::WEIGHED_AVERAGE_STR => println!("{}", functions::weighed_average(&sample_values, &weight_values, sample_size)),
-            gui::STD_DEVIATION_STR => println!("{}", functions::standard_deviation(&sample_values, sample_size)),
-            gui::BIG_VALUE_STR => println!("{}", functions::get_biggest_value(&sample_values)),
-            gui::SMALL_VALUE_STR => println!("{}", functions::get_smallest_value(&sample_values)),
+            gui::AVERAGE_STR => {
+                if sample_values.len() != sample_size {
+                    functions::change_vec_values(&mut sample_values, sample_size);
+                }
+                println!("{}", functions::average(&sample_values, sample_size));
+            },
+            gui::WEIGHED_AVERAGE_STR => {
+                functions::check_if_empty(&mut sample_values, sample_size);
+                functions::check_if_empty(&mut weight_values, sample_size);
+
+                println!("{}", functions::weighed_average(&sample_values, &weight_values));
+            },
+            gui::STD_DEVIATION_STR => {
+                functions::check_if_empty(&mut sample_values, sample_size);
+                println!("{}", functions::standard_deviation(&sample_values, sample_size));
+            },
+            gui::BIG_VALUE_STR => {
+                functions::check_if_empty(&mut sample_values, sample_size);
+                println!("{}", functions::get_biggest_value(&sample_values));
+            },
+            gui::SMALL_VALUE_STR => {
+                functions::check_if_empty(&mut sample_values, sample_size);
+                println!("{}", functions::get_smallest_value(&sample_values));
+            },
 
             gui::RESET_SCREEN_STR => (),
             gui::SHOW_ALL_STR => {

@@ -1,6 +1,14 @@
 pub use std::io;
 
 
+pub fn check_if_empty(values_vec: &mut Vec<f32>, sample_size: usize)
+{
+    if values_vec.len() != sample_size {
+        change_vec_values(values_vec, sample_size);
+    }
+}
+
+
 // Value calculation functions
 pub fn average(values_vec: &Vec<f32>, sample_size: usize) -> f32 {
     let mut average_value: f32 = 0.0;
@@ -12,7 +20,7 @@ pub fn average(values_vec: &Vec<f32>, sample_size: usize) -> f32 {
     return average_value / (sample_size as f32);
 }
 
-pub fn weighed_average(values_vec: &Vec<f32>, weights_vec: &Vec<f32>, sample_size: usize) -> f32 {
+pub fn weighed_average(values_vec: &Vec<f32>, weights_vec: &Vec<f32>) -> f32 {
     let mut weighed_average_value: f32 = 0.0;
     let mut weight_sum: f32 = 0.0;
 
@@ -64,14 +72,19 @@ pub fn get_smallest_value(values_vec: &Vec<f32>) -> f32 {
 
 
 // Vector manipulation functions
-pub fn change_vec_values(mut vec: Vec<f32>, sample_size: usize) -> Vec<f32> {
+pub fn change_vec_values(vec: &mut Vec<f32>, sample_size: usize) {
     vec.clear();
-    vec = Vec::with_capacity(sample_size);
 
     let mut input: String = String::new();
 
-    for index in 0..sample_size {
-        io::stdin().read_line(&mut input);
+    for _ in 0..sample_size {
+        match io::stdin().read_line(&mut input) {
+            Err(error) => {
+                println!("Invalid input. Exiting method.\nerror: {error}");
+                return;
+            },
+            _ => (),
+        };
         input.pop();
     
         let input_as_f32: f32 = match input.parse::<f32>() {
@@ -83,20 +96,32 @@ pub fn change_vec_values(mut vec: Vec<f32>, sample_size: usize) -> Vec<f32> {
         input.clear();
     }
 
-    vec
+    //vec
 }
 
-pub fn change_vec_size(values_vec: Vec<f32>, mut sample_size: usize) -> Vec<f32> {
+pub fn reset_vec_values(vec: &mut Vec<f32>, sample_size: usize) {
+    vec.clear();
+
+    for _ in 0..sample_size {
+        vec.push(1.0);
+    }
+}
+
+pub fn change_vec_size(values_vec: Vec<f32>) -> usize {
     let mut input = String::new();
     
-    io::stdin().read_line(&mut input);
+    match io::stdin().read_line(&mut input) {
+        Err(error) => {
+            println!("Invalid input. Defaulting to '5'\n error: {error}");
+            input = String::from("5");
+        },
+        _ => (),
+    };
     
-    let input_as_usize: usize = match input.parse::<usize>() {
+    let sample_size: usize = match input.parse::<usize>() {
         Ok(v) => v,
         Err(_) => 5
     };
-    
-    sample_size = input_as_usize;
 
-    Vec::with_capacity(input_as_usize)
+    sample_size
 }
