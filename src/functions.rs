@@ -77,23 +77,24 @@ pub fn change_vec_values(vec: &mut Vec<f32>, sample_size: usize) {
 
     let mut input: String = String::new();
 
-    for _ in 0..sample_size {
-        match io::stdin().read_line(&mut input) {
-            Err(error) => {
-                println!("Invalid input. Exiting method.\nerror: {error}");
-                return;
-            },
-            _ => (),
-        };
-        input.pop();
-    
-        let input_as_f32: f32 = match input.parse::<f32>() {
+    match io::stdin().read_line(&mut input) {
+        Err(error) => {
+            println!("Invalid input. Exiting method.\nerror: {error}");
+            return;
+        },
+        _ => (),
+    };
+    input.pop();
+
+    let values_vec: Vec<&str> = input.split(' ').collect();
+
+    for i in 0..sample_size {
+        let input_as_f32: f32 = match values_vec[i].parse::<f32>() {
             Ok(v) => v,
             Err(_) => 0.0
         };
 
         vec.push(input_as_f32);
-        input.clear();
     }
 
     //vec

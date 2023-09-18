@@ -30,6 +30,7 @@ pub const SMALL_VALUE_STR    : &str = "svl";
 // General purpose commands
 pub const HIDE_WARNINGS_STR: &str = "hid";
 pub const RESET_SCREEN_STR : &str = "rsc";
+pub const CLEAR_SCREEN_STR : &str = "clr";
 pub const EXIT_STR         : &str = "q";
 pub const HELP_STR         : &str = "h";
 
@@ -92,6 +93,7 @@ pub fn print_commands() {
 
 	println!("| {} ========================================================== |", "Utilities".magenta().bold().underline());
 	println!("| {} -------------------------------------------------- {} |",      "RESET CONSOLE".bright_blue()    , RESET_SCREEN_STR.bright_red().italic() );
+	println!("| {} -------------------------------------------------- {} |",      "CLEAR CONSOLE".bright_blue()    , CLEAR_SCREEN_STR.bright_red().italic() );
 	println!("| {} ----------------------------------------------------- {} |",   "REQUEST HELP".bright_blue()     , HELP_STR.bright_red().italic()         );
 	println!("| {} ------------------------------------------------ {} |",        "TERMINATE PROGRAM".bright_blue(), EXIT_STR.bright_red().italic()         );
 	println!("|______________________________________________________________________|\n");

@@ -139,6 +139,7 @@ fn main() {
             },
 
             gui::RESET_SCREEN_STR => gui::reset_and_print_all(),
+            gui::CLEAR_SCREEN_STR => print!("{esc}c", esc = 27 as char),
             gui::SHOW_ALL_STR => {
                 show_sample_size = true;
                 show_sample_values = true;
@@ -148,10 +149,7 @@ fn main() {
             gui::SHOW_VALUES_STR => show_sample_values = !show_sample_values,
             gui::SHOW_WEIGHTS_STR => show_weight_values = !show_weight_values,
 
-            gui::HIDE_WARNINGS_STR => {
-                gui::reset_and_print_all();
-                show_warnings = !show_warnings;
-            },
+            gui::HIDE_WARNINGS_STR => show_warnings = !show_warnings,
             gui::HELP_STR => gui::print_commands(),
             gui::EXIT_STR => println!("\n{}", "(*) Exiting program...".bright_yellow().bold()),
 
