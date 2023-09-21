@@ -33,7 +33,7 @@ fn main() {
 
             if sample_values.is_empty() && show_warnings {
                 println!("{}", "(!) SAMPLE VECTOR IS EMPTY!".bright_red().bold().blink());
-                println!("(?) {} {} {}", "Use".italic(), "set".green().italic(), "to set sample values".italic());
+                println!("(?) {} {} {}", "Use".italic(), gui::SET_VALUES_STR.green().italic(), "to set sample values".italic());
             }
         }
         if show_weight_values {
@@ -43,7 +43,7 @@ fn main() {
 
             if weight_values.is_empty() && show_warnings {
                 println!("{}", "(!) WEIGHT VECTOR IS EMPTY!".bright_red().bold().blink());
-                println!("(?) {} {} {}", "Use".italic(), "stw".green().italic(), "to set weight values".italic());
+                println!("(?) {} {} {}", "Use".italic(), gui::SET_WEIGHTS_STR.green().italic(), "to set weight values".italic());
             }
         }
 
@@ -66,11 +66,13 @@ fn main() {
                 println!("\n{} {sample_size} {}", "Type the".italic(), "new sample values:".italic());
                 sample_values.clear();
                 functions::change_vec_values(&mut sample_values, sample_size);
+                gui::reset_and_print_all();
             },
             gui::SET_WEIGHTS_STR => {
                 println!("\n{} {sample_size} {}", "Type the".italic(), "new weight values:".italic());
                 weight_values.clear();
                 functions::change_vec_values(&mut weight_values, sample_size);
+                gui::reset_and_print_all();
             },
             gui::SET_SAMPLE_SIZE_STR => {
                 println!("\n{}", "Type the new sample size:".italic());
