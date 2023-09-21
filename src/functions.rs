@@ -88,13 +88,17 @@ pub fn change_vec_values(vec: &mut Vec<f32>, sample_size: usize) {
 
     let values_vec: Vec<&str> = input.split(' ').collect();
 
-    for i in 0..sample_size {
+    for i in 0..values_vec.len() {
         let input_as_f32: f32 = match values_vec[i].parse::<f32>() {
             Ok(v) => v,
             Err(_) => 0.0
         };
 
         vec.push(input_as_f32);
+    }
+
+    for _ in values_vec.len()..sample_size {
+        vec.push(0.0);
     }
 
     //vec
