@@ -173,6 +173,11 @@ fn main() {
                         show_sample_values = true;
                         show_weight_values = true;
                     },
+                    gui::HIDE_ALL_STR => {
+                        show_sample_size = false;
+                        show_sample_values = false;
+                        show_weight_values = false;
+                    },
                     gui::SHOW_SAMPLE_SIZE_STR => show_sample_size = !show_sample_size,
                     gui::SHOW_VALUES_STR => show_sample_values = !show_sample_values,
                     gui::SHOW_WEIGHTS_STR => show_weight_values = !show_weight_values,
@@ -327,6 +332,11 @@ fn main() {
                 show_sample_size = true;
                 show_sample_values = true;
                 show_weight_values = true;
+            },
+            gui::HIDE_ALL_STR => {
+                show_sample_size = false;
+                show_sample_values = false;
+                show_weight_values = false;
             },
             gui::SHOW_SAMPLE_SIZE_STR => show_sample_size = !show_sample_size,
             gui::SHOW_VALUES_STR => show_sample_values = !show_sample_values,
