@@ -9,6 +9,9 @@ pub const RESET_VALUE_STR    : &str = "rsv";
 pub const RESET_WEIGHTS_STR  : &str = "rsw";
 pub const RESET_ALL_STR      : &str = "rsa";
 
+pub const SET_VALUE_AT_INDEX_STR: &str = "svi";
+pub const SET_WEIGHT_AT_INDEX_STR: &str = "swi";
+
 // File manipulation
 pub const VALUES_FROM_FILE_STR : &str = "rvf";
 pub const WEIGHTS_FROM_FILE_STR: &str = "rwf";
@@ -54,65 +57,32 @@ pub fn print_title() {
 	println!("{}", "  / ____/___ _/ /______  __/ /___ _/ /_____  _____                    ".red());
 	println!("{}", " / /   / __ `/ / ___/ / / / / __ `/ __/ __ \\/ ___/                    ".red());
 	println!("{}", "/ /___/ /_/ / / /__/ /_/ / / /_/ / /_/ /_/ / /                        ".magenta());
-	println!("{} {}", "\\____/\\__,_/_/\\___/\\__,_/_/\\__,_/\\__/\\____/_/".magenta(), "v1.2.0.rs".truecolor(142, 50, 142));
+	println!("{}", "\\____/\\__,_/_/\\___/\\__,_/_/\\__,_/\\__/\\____/_/ v0.9.0.rs".magenta());
 	println!("{}\n", "~By Raphael Zoega~".truecolor(115, 115, 115).italic());
 }
 
 pub fn print_all_commands() {
 	print_header();
-    /*println!(" ______________________________________________________________________");
-	println!("|                                                                      |");
-	println!("| {}                                                       {}  |", "FUNCTION".bright_blue().bold(), "CODE".bright_red().bold());
-	println!("|                                                                      |");*/
 
 	print_values_help();
-	/*println!("| {} ======================================================= |", "Values setup".magenta().bold().underline());
-	println!("| {} ---------------------------------------------- {} |",       "SET SAMPLE VALUES".bright_blue()  , SET_VALUES_STR.bright_red().italic()      );
-	println!("| {} ---------------------------------------------- {} |",       "SET WEIGHT VALUES".bright_blue()  , SET_WEIGHTS_STR.bright_red().italic()     );
-	println!("| {} ------------------------------------------------ {} |",     "SET SAMPLE SIZE".bright_blue()    , SET_SAMPLE_SIZE_STR.bright_red().italic() );
-	println!("| {} -------------------------------------------- {} |",         "RESET SAMPLE VALUES".bright_blue(), RESET_VALUE_STR.bright_red().italic()     );
-	println!("| {} -------------------------------------------- {} |",         "RESET WEIGHT VALUES".bright_blue(), RESET_WEIGHTS_STR.bright_red().italic()   );
-	println!("| {} ----------------------------------------------- {} |",      "RESET ALL VALUES".bright_blue()   , RESET_ALL_STR.bright_red().italic()       );*/
 	
 	println!("|                                                                      |");
 
 	print_calculations_help();
-	/*println!("| {} ======================================================= |",     "Calculations".magenta().bold().underline());
-	println!("| {} -------------------------------------------------------- {} |", "AVERAGE".bright_blue()           , AVERAGE_STR.bright_red().italic()         );
-	println!("| {} ----------------------------------------------- {} |",          "WEIGHTED AVERAGE".bright_blue()  , WEIGHED_AVERAGE_STR.bright_red().italic() );
-	println!("| {} --------------------------------------------- {} |",            "STANDARD DEVIATION".bright_blue(), STD_DEVIATION_STR.bright_red().italic()   );
-	println!("| {} ------------------------------------------------- {} |",        "GREATEST VALUE".bright_blue()    , BIG_VALUE_STR.bright_red().italic()       );
-	println!("| {} ------------------------------------------------- {} |",        "SMALLEST VALUE".bright_blue()    , SMALL_VALUE_STR.bright_red().italic()     );
-	println!("| {} ------------------------------------------- {} |",              "CLACULATE ALL VALUES".bright_blue()    , ALL_CALCS_STR.bright_red().italic() );*/
 	
 	println!("|                                                                      |");
 
 	print_file_help();
-	/*println!("| {} ================================================== |", "File manipulation".magenta().bold().underline());
-	println!("| {} ------------------------------------------ {} |",      "READ VALUES FROM FILE".bright_blue() , VALUES_FROM_FILE_STR.bright_red().italic()  );
-	println!("| {} ----------------------------------------- {} |",       "READ WEIGHTS FROM FILE".bright_blue(), WEIGHTS_FROM_FILE_STR.bright_red().italic() );*/
 	
 	println!("|                                                                      |");
 
 	print_visuals_help();
-	/*println!("| {} ============================================================ |", "Visuals".magenta().bold().underline());
-	println!("| {} --------------------------------------------- {} |", "TOGGLE SHOW VALUES".bright_blue()     , SHOW_VALUES_STR.bright_red().italic()   );
-	println!("| {} -------------------------------------------- {} |",  "TOGGLE SHOW WEIGHTS".bright_blue()    , SHOW_WEIGHTS_STR.bright_red().italic()  );
-	println!("| {} ---------------------------------------- {} |",      "SHOW VALUES AND WEIGHTS".bright_blue(), SHOW_ALL_STR.bright_red().italic()      );
-	println!("| {} ---------------------------------------- {} |",      "HIDE VALUES AND WEIGHTS".bright_blue(), HIDE_ALL_STR.bright_red().italic()      );
-	println!("| {} ------------------------------------------- {} |",   "TOGGLE HIDE WARNINGS".bright_blue()   , HIDE_WARNINGS_STR.bright_red().italic() );*/
 	
 	println!("|                                                                      |");
 
 	print_utilities_help();
-	/*println!("| {} ========================================================== |", "Utilities".magenta().bold().underline());
-	println!("| {} -------------------------------------------------- {} |",      "RESET CONSOLE".bright_blue()    , RESET_SCREEN_STR.bright_red().italic() );
-	println!("| {} -------------------------------------------------- {} |",      "CLEAR CONSOLE".bright_blue()    , CLEAR_SCREEN_STR.bright_red().italic() );
-	println!("| {} ----------------------------------------------------- {} |",   "REQUEST HELP".bright_blue()     , HELP_STR.bright_red().italic()         );
-	println!("| {} ------------------------------------------------ {} |",        "TERMINATE PROGRAM".bright_blue(), EXIT_STR.bright_red().italic()         );*/
 	
 	print_foot();
-	//println!("|______________________________________________________________________|\n");
 }
 
 pub fn print_header()
@@ -137,6 +107,9 @@ pub fn print_values_help()
 	println!("| {} -------------------------------------------- {} |",         "RESET SAMPLE VALUES".bright_blue(), RESET_VALUE_STR.bright_red().italic()     );
 	println!("| {} -------------------------------------------- {} |",         "RESET WEIGHT VALUES".bright_blue(), RESET_WEIGHTS_STR.bright_red().italic()   );
 	println!("| {} ----------------------------------------------- {} |",      "RESET ALL VALUES".bright_blue()   , RESET_ALL_STR.bright_red().italic()       );
+	println!("| {} --------------------------------------------- {} |",         "SET VALUE AT INDEX".bright_blue()  , SET_VALUE_AT_INDEX_STR.bright_red().italic()     );
+	println!("| {} -------------------------------------------- {} |",          "SET WEIGHT AT INDEX".bright_blue()  , SET_WEIGHT_AT_INDEX_STR.bright_red().italic()     );
+
 }
 
 pub fn print_calculations_help()

@@ -1,3 +1,4 @@
+use colored::*;
 pub use std::io;
 
 
@@ -79,7 +80,7 @@ pub fn change_vec_values(vec: &mut Vec<f32>, sample_size: usize) {
 
     match io::stdin().read_line(&mut input) {
         Err(error) => {
-            println!("Invalid input. Exiting method.\nerror: {error}");
+            println!("{} {error}", "(!) Invalid input. Exiting method.\nerror:".bright_red().bold());
             return;
         },
         _ => (),
@@ -88,7 +89,13 @@ pub fn change_vec_values(vec: &mut Vec<f32>, sample_size: usize) {
 
     let values_vec: Vec<&str> = input.split(' ').collect();
 
-    for i in 0..values_vec.len() {
+    let array_size = if values_vec.len() < sample_size { 
+        values_vec.len() 
+    } else {
+        sample_size
+    };
+
+    for i in 0..array_size {
         let input_as_f32: f32 = match values_vec[i].parse::<f32>() {
             Ok(v) => v,
             Err(_) => 0.0
@@ -115,4 +122,57 @@ pub fn reset_vec_values(vec: &mut Vec<f32>, sample_size: usize) {
 pub fn change_vec_size(values_vec: &mut Vec<f32>, sample_size: usize) {
     values_vec.clear();
     values_vec.resize(sample_size, 0.0);
+}
+
+pub fn change_vec_value_at_index(vec: &mut Vec<f32>)
+{
+    let mut input: String = String::new();
+
+    println!("\n{}", "Type the index to insert into:".italic());
+
+    match io::stdin().read_line(&mut input) {
+        Err(error) => {
+            println!("{} {error}", "(!) Invalid input. Exiting method.\nerror:".bright_red().bold());
+            return;
+        },
+        _ => (),
+    };
+    input.pop();
+
+    let input_as_usize: usize = match input.parse::<usize>() {
+        Ok(v) => v,
+        Err(error) => {
+            println!("{} {error}", "(!) Invalid input. Exiting method.\nerror:".bright_red().bold());
+            return;
+        }
+    };
+
+    if input_as_usize >= vec.len() {
+        println!("{}", "(!) Index out of bounds".bright_red().bold());
+        return;
+    }
+
+    input.clear();
+
+
+    println!("\n{}", "Type the value to into:".italic());
+
+    match io::stdin().read_line(&mut input) {
+        Err(error) => {
+            println!("{} {error}", "(!) Invalid input. Exiting method.\nerror:".bright_red().bold());
+            return;
+        },
+        _ => (),
+    };
+    input.pop();
+
+    let input_as_f32: f32 = match input.parse::<f32>() {
+        Ok(v) => v,
+        Err(error) => {
+            println!("{} {error}", "(!) Invalid input. Exiting method.\nerror:".bright_red().bold());
+            return;
+        }
+    };
+
+    vec[input_as_usize] = input_as_f32;
 }
